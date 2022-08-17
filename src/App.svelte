@@ -20,8 +20,11 @@
     if (token) {
       verify(token)
         .then((response) => {
-          if (response.ok) {
+          if (response.auth) {
             isLogged = true;
+			// Get information form jwt token
+			username = response.username;
+			
           }
         })
         .finally(() => {

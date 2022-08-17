@@ -1,16 +1,36 @@
 <script>
+  import { onMount } from "svelte";
+  import { notifications } from "../common/notifications/notifications";
   import { login } from "../common/api";
 
+  let fired = false;
+
   let handleLogin = async () => {
+    if (isLoading) return;
     isLoading = true;
     let response = await login(username, password);
-    if (response.ok) {
+    if (response.success) {
       isLogged = true;
-	  // Assign cookie to token
-	  document.cookie = "token=" + response.data.token;
+      document.cookie = "token=" + response.token;
+    } else {
+      console.log("response:", response);
     }
     isLoading = false;
   };
+
+  onMount(() => {
+    window.onkeydown = function (e) {
+      if (!fired) {
+        if (e.key === "Enter") {
+          fired = true;
+          handleLogin();
+        }
+      }
+    };
+    window.onkeyup = function () {
+      fired = false;
+    };
+  });
 
   export let username;
   export let password;
