@@ -1,13 +1,25 @@
 <script>
+  import { onMount } from "svelte";
+  import { notifications } from "../common/notifications/notifications";
   import { register } from "../common/api";
 
+  let fired = false;
+
   let handleRegister = async () => {
+    if (isLoading) return;
+    if (username === "" || password === "" || passwordConfirmation === "") {
+      notifications.warning("Please fill in all the blanks", 3000);
+      return;
+    }
+
     isLoading = true;
     let response = await register(username, password);
-    if (response.ok) {
+    if (response.success) {
       isLogged = true;
-      // Assign cookie to token
-      document.cookie = "token=" + response.data.token;
+      document.cookie = "token=" + response.token;
+      notifications.success("Registered in successfully", 3000);
+    } else {
+      notifications.danger(response.message, 4000);
     }
     isLoading = false;
   };
@@ -16,8 +28,21 @@
   export let password;
   export let isLoading;
   export let isLogged;
+  export let passwordConfirmation;
 
-  let passwordConfirmation = "";
+  onMount(() => {
+    window.onkeydown = function (e) {
+      if (!fired) {
+        if (e.key === "Enter") {
+          fired = true;
+          handleRegister();
+        }
+      }
+    };
+    window.onkeyup = function () {
+      fired = false;
+    };
+  });
 </script>
 
 <!-- Login box -->

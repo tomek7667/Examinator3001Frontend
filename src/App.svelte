@@ -4,6 +4,7 @@
   import RegisterBox from "./lib/login/RegisterBox.svelte";
   import Loading from "./lib/common/Loading.svelte";
   import WantLogin from "./lib/login/WantLogin.svelte";
+  import Toast from "./lib/common/notifications/Toast.svelte";
   import { onMount } from "svelte";
   import { getCookie, verify } from "./lib/common/api";
 
@@ -13,6 +14,7 @@
 
   let username = "";
   let password = "";
+  let passwordConfirmation = "";
 
   onMount(() => {
     // Get token based on cookie then change isLogged variable
@@ -22,9 +24,8 @@
         .then((response) => {
           if (response.auth) {
             isLogged = true;
-			// Get information form jwt token
-			username = response.username;
-			
+            // Get information form jwt token
+            username = response.username;
           }
         })
         .finally(() => {
@@ -45,7 +46,13 @@
       {#if wantLogin}
         <LoginBox bind:username bind:password bind:isLoading bind:isLogged />
       {:else}
-        <RegisterBox bind:username bind:password bind:isLoading bind:isLogged />
+        <RegisterBox
+          bind:username
+          bind:password
+          bind:isLoading
+          bind:isLogged
+          bind:passwordConfirmation
+        />
       {/if}
       <WantLogin bind:wantLogin />
       <Footer />
@@ -54,3 +61,5 @@
     {/if}
   </main>
 {/if}
+
+<Toast />

@@ -7,13 +7,19 @@
 
   let handleLogin = async () => {
     if (isLoading) return;
+    if (username === "" || password === "") {
+      notifications.warning("Please fill in all the blanks", 3000);
+      return;
+    }
+
     isLoading = true;
     let response = await login(username, password);
     if (response.success) {
       isLogged = true;
       document.cookie = "token=" + response.token;
+      notifications.success("Logged in successfully", 3000);
     } else {
-      console.log("response:", response);
+      notifications.danger(response.message, 1000);
     }
     isLoading = false;
   };

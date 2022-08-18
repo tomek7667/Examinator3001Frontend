@@ -31,20 +31,25 @@ const login = (username, password) => {
 };
 
 const register = (username, password) => {
-  return fetch(baseAddress + "/register", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      username: username,
-      password: password,
-    }),
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      return res;
-    });
+  return new Promise((resolve) => {
+    fetch(baseAddress + "/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        return resolve(res);
+      })
+      .catch((err) => {
+        return resolve(err);
+      });
+  });
 };
 
 const verify = (token) => {
