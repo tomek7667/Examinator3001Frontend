@@ -17,7 +17,7 @@
     if (response.success) {
       isLogged = true;
       document.cookie = "token=" + response.token;
-      notifications.success("Registered in successfully", 3000);
+      notifications.success("Registered successfully", 3000);
     } else {
       notifications.danger(response.message, 4000);
     }

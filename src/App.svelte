@@ -5,6 +5,7 @@
   import Loading from "./lib/common/Loading.svelte";
   import WantLogin from "./lib/login/WantLogin.svelte";
   import Toast from "./lib/common/notifications/Toast.svelte";
+  import Home from "./lib/home/Home.svelte";
   import { onMount } from "svelte";
   import { getCookie, verify } from "./lib/common/api";
 
@@ -39,27 +40,25 @@
 
 {#if isLoading}
   <Loading />
-{:else}
+{:else if !isLogged}
   <main>
-    {#if !isLogged}
-      <h1>Examinator 3001</h1>
-      {#if wantLogin}
-        <LoginBox bind:username bind:password bind:isLoading bind:isLogged />
-      {:else}
-        <RegisterBox
-          bind:username
-          bind:password
-          bind:isLoading
-          bind:isLogged
-          bind:passwordConfirmation
-        />
-      {/if}
-      <WantLogin bind:wantLogin />
-      <Footer />
+    <h1>Examinator 3001</h1>
+    {#if wantLogin}
+      <LoginBox bind:username bind:password bind:isLoading bind:isLogged />
     {:else}
-      <h1>You are logged in as {username}</h1>
+      <RegisterBox
+        bind:username
+        bind:password
+        bind:isLoading
+        bind:isLogged
+        bind:passwordConfirmation
+      />
     {/if}
+    <WantLogin bind:wantLogin />
+    <Footer />
   </main>
+{:else}
+  <Home bind:isLoading bind:username />
 {/if}
 
 <Toast />

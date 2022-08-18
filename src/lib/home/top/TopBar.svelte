@@ -1,0 +1,25 @@
+<script>
+  import TopBarElement from "./TopBarElement.svelte";
+
+  let routeNames = ["Home", "Public Exams", "Your Exams", "Account"];
+
+  export let route;
+</script>
+
+<div class="top">
+  {#each routeNames as routeName}
+    <TopBarElement {route} buttonName={routeName} />
+  {/each}
+</div>
+
+<style>
+  .top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #1e1e1e;
+    height: 45px;
+    width: 100%;
+    padding: 0px;
+  }
+</style>
