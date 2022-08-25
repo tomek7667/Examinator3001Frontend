@@ -8,8 +8,9 @@
 
 <div class="top">
   {#each routeNames as routeName}
-    <TopBarElement {route} buttonName={routeName} />
+    <TopBarElement bind:route buttonName={routeName}/>
   {/each}
+  <TopBarElement bind:route buttonName="Logout" isLogOut={true} />
 </div>
 
 <style>
