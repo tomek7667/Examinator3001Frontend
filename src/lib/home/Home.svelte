@@ -26,7 +26,7 @@
 {:else if route === routeNames[2]}
   <YourExamsPage />
 {:else if route === routeNames[3]}
-  <AccountPage />
+  <AccountPage bind:username />
 {/if}
 
 <footer>You are logged in as <b>{username}</b></footer>

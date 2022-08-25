@@ -53,6 +53,7 @@
   }
 
   .logout {
-    float: right;
+    position: absolute;
+    right: 20px;
   }
 </style>

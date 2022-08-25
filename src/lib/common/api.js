@@ -68,4 +68,45 @@ const verify = (token) => {
     });
 };
 
-export { login, register, verify, getCookie };
+const changePassword = (oldPassword, newPassword, token) => {
+  return fetch(baseAddress + "/changePassword", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+      token: token,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
+const changeUsername = (username, token) => {
+  return fetch(baseAddress + "/changeUsername", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username: username,
+      token: token,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
+export { login, register, verify, getCookie, changePassword, changeUsername };
