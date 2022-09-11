@@ -2,13 +2,11 @@
   import { onMount } from "svelte";
   import TopBar from "./top/TopBar.svelte";
   import HomePage from "./HomePage.svelte";
-  import PublicExamsPage from "./PublicExamsPage.svelte";
-  import YourExamsPage from "./YourExamsPage.svelte";
+  import PublicExamsPage from "./public_exams/PublicExamsPage.svelte";
+  import YourExamsPage from "./your_exams/YourExamsPage.svelte";
   import AccountPage from "./AccountPage.svelte";
-
+  import { routeNames } from "../common/routes.js";
   let route = "Home";
-  let routeNames = ["Home", "Public Exams", "Your Exams", "Account"];
-
   onMount(() => {
     isLoading = false;
   });
@@ -20,7 +18,7 @@
 <TopBar bind:route />
 
 {#if route === routeNames[0]}
-  <HomePage />
+  <HomePage bind:route />
 {:else if route === routeNames[1]}
   <PublicExamsPage />
 {:else if route === routeNames[2]}

@@ -1,14 +1,13 @@
 <script>
   import TopBarElement from "./TopBarElement.svelte";
-
-  let routeNames = ["Home", "Public Exams", "Your Exams", "Account"];
+  import { routeNames } from "../../common/routes.js";
 
   export let route;
 </script>
 
 <div class="top">
   {#each routeNames as routeName}
-    <TopBarElement bind:route buttonName={routeName}/>
+    <TopBarElement bind:route buttonName={routeName} />
   {/each}
   <TopBarElement bind:route buttonName="Logout" isLogOut={true} />
 </div>
