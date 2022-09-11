@@ -26,11 +26,9 @@
 
   onMount(() => {
     window.onkeydown = function (e) {
-      if (!fired) {
-        if (e.key === "Enter") {
-          fired = true;
-          handleLogin();
-        }
+      if (!fired && !isLogged && e.key === "Enter") {
+        fired = true;
+        handleLogin();
       }
     };
     window.onkeyup = function () {

@@ -1,22 +1,31 @@
 <script>
-  import { notifications } from "../../common/notifications/notifications";
   import { getCookie, changeUsername } from "../../common/api";
+  import {
+    successToast,
+    errorToast,
+  } from "../../common/notifications/theme.js";
 
   export let username;
   let newUsername = username;
 
   let onChangeUsernameClick = () => {
+    if (newUsername === username) {
+      errorToast("New username cannot be the same as old username");
+      return;
+    }
+
     changeUsername(newUsername, getCookie("token"))
       .then((response) => {
         if (response.success) {
-          notifications.success("Username changed successfully", 3000);
+          successToast("Username changed successfully");
           username = newUsername;
+          document.cookie = "token=" + response.token;
         } else {
-          notifications.error(response.message, 3000);
+          errorToast(response.message);
         }
       })
       .catch((error) => {
-        notifications.error(error.message, 3000);
+        errorToast(error.message);
       });
   };
 </script>

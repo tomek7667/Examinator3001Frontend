@@ -10,6 +10,14 @@
   let passwordConfirmation = "";
 
   let onChangePasswordClick = () => {
+    if (newPassword !== passwordConfirmation) {
+      errorToast("New passwords do not match");
+      return;
+    }
+    if (oldPassword === newPassword) {
+      errorToast("New password cannot be the same as old password");
+      return;
+    }
     changePassword(oldPassword, newPassword, getCookie("token"))
       .then((response) => {
         if (response.success) {
