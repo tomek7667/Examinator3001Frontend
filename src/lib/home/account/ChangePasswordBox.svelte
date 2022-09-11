@@ -1,6 +1,9 @@
 <script>
-  import { notifications } from "../../common/notifications/notifications";
   import { getCookie, changePassword } from "../../common/api";
+  import {
+    successToast,
+    errorToast,
+  } from "../../common/notifications/theme.js";
 
   let oldPassword = "";
   let newPassword = "";
@@ -10,16 +13,17 @@
     changePassword(oldPassword, newPassword, getCookie("token"))
       .then((response) => {
         if (response.success) {
-          notifications.success("Password changed successfully", 3000);
+          // toast.success("Password changed successfully");
+          successToast("Password changed successfully");
           oldPassword = "";
           newPassword = "";
           passwordConfirmation = "";
         } else {
-          notifications.error(response.message, 3000);
+          errorToast(response.message);
         }
       })
       .catch((error) => {
-        notifications.error(error.message, 3000);
+        successToast(error.message);
       });
   };
 </script>

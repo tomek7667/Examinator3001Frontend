@@ -27,6 +27,11 @@
     magic-string "^0.26.2"
     svelte-hmr "^0.14.12"
 
+"@zerodevx/svelte-toast@^0.7.2":
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/@zerodevx/svelte-toast/-/svelte-toast-0.7.2.tgz#904610b7d99d099bcdb83a005ee32e0b3351c909"
+  integrity sha512-vWiY6IqsstcOoQ8PFBuFuxgPkj1JFAGhUF9gC7wLx7c5A9SSfdtxWs/39ekGSIeyJK0yqWhTcmzGrCEWSELzDw==
+
 debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
@@ -276,11 +281,6 @@ svelte-hmr@^0.14.12:
   version "0.14.12"
   resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.14.12.tgz#a127aec02f1896500b10148b2d4d21ddde39973f"
   integrity sha512-4QSW/VvXuqVcFZ+RhxiR8/newmwOCTlbYIezvkeN6302YFRE8cXy0naamHcjz8Y9Ce3ITTZtrHrIL0AGfyo61w==
-
-svelte-switch@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/svelte-switch/-/svelte-switch-0.0.5.tgz#2e877c12173173795a1675b059a34666f111c573"
-  integrity sha512-nVKSoOlJe1DNiiOyK/oMkZQwEuDgEq1fNmAYd+724Se8eyN/2HRbYiyOvDpNRpw0jJ+lE5vjLHfCruFrhJQFbA==
 
 svelte@^3.49.0:
   version "3.49.0"

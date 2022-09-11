@@ -12,6 +12,11 @@
       return;
     }
 
+    if (password != passwordConfirmation) {
+      notifications.warning("Passwords do not match", 3000);
+      return;
+    }
+
     isLoading = true;
     let response = await register(username, password);
     if (response.success) {

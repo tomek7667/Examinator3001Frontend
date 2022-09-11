@@ -4,7 +4,6 @@
   export let isLogOut = false;
 
   let navigate = () => {
-    console.log(buttonName);
     route = buttonName;
   };
 

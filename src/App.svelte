@@ -5,6 +5,7 @@
   import Loading from "./lib/common/Loading.svelte";
   import WantLogin from "./lib/login/WantLogin.svelte";
   import Toast from "./lib/common/notifications/Toast.svelte";
+  import { SvelteToast } from "@zerodevx/svelte-toast";
   import Home from "./lib/home/Home.svelte";
   import { onMount } from "svelte";
   import { getCookie, verify } from "./lib/common/api";
@@ -57,8 +58,9 @@
     <WantLogin bind:wantLogin />
     <Footer />
   </main>
+  <Toast />
 {:else}
   <Home bind:isLoading bind:username />
+  <Toast />
 {/if}
-
-<Toast />
+<SvelteToast />
