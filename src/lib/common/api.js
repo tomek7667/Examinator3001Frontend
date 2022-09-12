@@ -10,7 +10,7 @@ function getCookie(name) {
 
 const login = (username, password) => {
   return new Promise((resolve) => {
-    fetch(baseAddress + "/login", {
+    fetch(baseAddress + "/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +32,7 @@ const login = (username, password) => {
 
 const register = (username, password) => {
   return new Promise((resolve) => {
-    fetch(baseAddress + "/register", {
+    fetch(baseAddress + "/user/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const register = (username, password) => {
 };
 
 const verify = (token) => {
-  return fetch(baseAddress + "/verify", {
+  return fetch(baseAddress + "/user/verify", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -69,7 +69,7 @@ const verify = (token) => {
 };
 
 const changePassword = (oldPassword, newPassword, token) => {
-  return fetch(baseAddress + "/changePassword", {
+  return fetch(baseAddress + "/user/change-password", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -90,7 +90,7 @@ const changePassword = (oldPassword, newPassword, token) => {
 };
 
 const changeUsername = (username, token) => {
-  return fetch(baseAddress + "/changeUsername", {
+  return fetch(baseAddress + "/user/change-username", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
