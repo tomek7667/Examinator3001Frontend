@@ -6,7 +6,9 @@
   import YourExamsPage from "./your_exams/YourExamsPage.svelte";
   import AccountPage from "./AccountPage.svelte";
   import { routeNames } from "../common/routes.js";
+  import CreateExamPage from "./create_exam/CreateExamPage.svelte";
   let route = "Home";
+  let wantExamCreator = true;
   onMount(() => {
     isLoading = false;
   });
@@ -25,6 +27,8 @@
   <YourExamsPage />
 {:else if route === routeNames[3]}
   <AccountPage bind:username />
+{:else if route === routeNames[4]}
+  <CreateExamPage bind:wantExamCreator />
 {/if}
 
 <footer>You are logged in as <b>{username}</b></footer>
