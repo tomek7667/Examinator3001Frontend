@@ -1,5 +1,6 @@
 <script>
   import { routes } from "../common/routes.js";
+  import { logout } from "../common/api.js";
   export let route;
 
   let createExam = () => {
@@ -25,6 +26,7 @@
   <button on:click={browsePublicExams}>Browse public exams</button>
   <button on:click={browsePublicExams}>Browse your exams</button>
   <button on:click={manageAccount}>Manage your account</button>
+  <button on:click={logout}>Log out</button>
 </div>
 
 <style>

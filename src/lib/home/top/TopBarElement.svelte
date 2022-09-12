@@ -1,15 +1,11 @@
 <script>
+  import { logout } from "../../common/api.js";
   export let route;
   export let buttonName;
   export let isLogOut = false;
 
   let navigate = () => {
     route = buttonName;
-  };
-
-  let logout = () => {
-    document.cookie = "token=;";
-    window.location.reload();
   };
 </script>
 
@@ -24,7 +20,7 @@
     </div>
   {/if}
 {:else}
-  <div class="topBarElement logout" on:click={logout}>
+  <div class="topBarElement" on:click={logout}>
     {buttonName}
   </div>
 {/if}
@@ -50,10 +46,5 @@
     border-bottom: 2px solid #fff;
     /* Shadow */
     box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
-  }
-
-  .logout {
-    position: absolute;
-    right: 20px;
   }
 </style>

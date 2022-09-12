@@ -7,6 +7,7 @@
   import AccountPage from "./AccountPage.svelte";
   import { routeNames } from "../common/routes.js";
   import CreateExamPage from "./create_exam/CreateExamPage.svelte";
+  import Footer from "../common/Footer.svelte";
   let route = "Home";
   let wantExamCreator = true;
   onMount(() => {
@@ -31,7 +32,7 @@
   <CreateExamPage bind:wantExamCreator />
 {/if}
 
-<footer>You are logged in as <b>{username}</b></footer>
+<footer>You are logged in as <b>{username}</b><Footer /></footer>
 
 <style>
   footer {
@@ -39,7 +40,7 @@
     bottom: 0;
     left: 0;
     background-color: #1e1e1e;
-    height: 45px;
+    height: 65px;
     width: 100%;
     padding: 10px;
   }

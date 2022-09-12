@@ -109,4 +109,17 @@ const changeUsername = (username, token) => {
     });
 };
 
-export { login, register, verify, getCookie, changePassword, changeUsername };
+const logout = () => {
+  document.cookie = "token=;";
+  window.location.reload();
+};
+
+export {
+  login,
+  register,
+  logout,
+  verify,
+  getCookie,
+  changePassword,
+  changeUsername,
+};

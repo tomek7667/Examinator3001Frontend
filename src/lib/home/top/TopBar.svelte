@@ -21,5 +21,14 @@
     height: 45px;
     width: 100%;
     padding: 0px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .top::-webkit-scrollbar {
+    display: none;
   }
 </style>
