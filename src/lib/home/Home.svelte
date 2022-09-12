@@ -8,14 +8,15 @@
   import { routeNames } from "../common/routes.js";
   import CreateExamPage from "./create_exam/CreateExamPage.svelte";
   import Footer from "../common/Footer.svelte";
+  export let isLoading = true;
+  export let username;
   let route = "Home";
   let wantExamCreator = true;
+  let canParse = true;
+  let examData = { name: "", questions: [], isPublic: false };
   onMount(() => {
     isLoading = false;
   });
-
-  export let isLoading = true;
-  export let username;
 </script>
 
 <TopBar bind:route />
@@ -29,7 +30,7 @@
 {:else if route === routeNames[3]}
   <AccountPage bind:username />
 {:else if route === routeNames[4]}
-  <CreateExamPage bind:wantExamCreator />
+  <CreateExamPage bind:wantExamCreator bind:examData bind:canParse />
 {/if}
 
 <footer>You are logged in as <b>{username}</b><Footer /></footer>
