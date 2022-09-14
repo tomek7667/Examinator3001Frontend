@@ -1,14 +1,15 @@
 <script>
+  import Switch from "../../common/Switch.svelte";
   import { onMount } from "svelte";
   export let isChecked;
   let checkmark;
   onMount(() => {
-    checkmark = isChecked ? "✓" : "✗";
+    checkmark = isChecked ? "[✓]" : "[✗]";
   });
 
   let toggle = () => {
     isChecked = !isChecked;
-    checkmark = isChecked ? "✓" : "✗";
+    checkmark = isChecked ? "[✓]" : "[✗]";
   };
 </script>
 

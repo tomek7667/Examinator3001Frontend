@@ -1,11 +1,11 @@
 const stringifyExamData = (examData) => {
   let strExamData = "";
   examData.questions.forEach((question, index) => {
-    strExamData += `Q${index + 1}: ${question.data}\n`;
+    strExamData += `Q${index + 1}:${question.text.trim()}:ENDOFLINE:\n`;
     question.answers.forEach((answer, index) => {
-      strExamData += `A${index + 1}:${answer.isCorrect}: ${
-        answer.data
-      }:ENDOFLINE:\n`;
+      strExamData += `A${index + 1}:${
+        answer.isCorrect
+      }:${answer.text.trim()}:ENDOFLINE:\n`;
     });
   });
   return strExamData;
@@ -17,23 +17,28 @@ const parseExamData = (strExamData) => {
     const examData = {
       questions: [],
     };
-    examArray.forEach((examLine) => {
-      if (examLine === "") return;
-      const examLineArray = examLine.split(":");
-      if (examLineArray[0].startsWith("Q")) {
-        examData.questions.push({
-          data: examLineArray[1],
+    let question = {
+      text: "",
+      answers: [],
+    };
+    examArray.forEach((line) => {
+      if (line.startsWith("Q")) {
+        if (question.text !== "") {
+          examData.questions.push(question);
+        }
+        question = {
+          text: line.split(":")[1],
           answers: [],
-        });
-      } else if (examLineArray[0].startsWith("A")) {
-        examData.questions[examData.questions.length - 1].answers.push({
-          isCorrect: examLineArray[1] === "true",
-          data: examLineArray[2],
-        });
-      } else {
-        throw new Error("Invalid exam data");
+        };
+      } else if (line.startsWith("A")) {
+        const answer = {
+          text: line.split(":")[2],
+          isCorrect: line.split(":")[1] === "true",
+        };
+        question.answers.push(answer);
       }
     });
+    examData.questions.push(question);
     return examData;
   } catch (err) {
     return null;

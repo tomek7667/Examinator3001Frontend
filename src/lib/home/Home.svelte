@@ -13,7 +13,11 @@
   let route = "Home";
   let wantExamCreator = true;
   let canParse = true;
-  let examData = { name: "", questions: [], isPublic: false };
+  let examData = {
+    name: "",
+    questions: [],
+    isPublic: false,
+  };
   onMount(() => {
     isLoading = false;
   });

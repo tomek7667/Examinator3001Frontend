@@ -10,7 +10,10 @@
   });
 
   let updateExamData = () => {
+    console.log(stringifiedExamData);
     const parsed = parseExamData(stringifiedExamData);
+    console.log(parsed);
+
     if (parsed) {
       examData = parsed;
       canParse = true;
@@ -20,14 +23,24 @@
   };
 </script>
 
-<p>Is parsable: <span>{canParse}</span></p>
-<textarea
-  bind:value={stringifiedExamData}
-  on:input={updateExamData}
-  class="RawEditor"
-/>
+<div class="body">
+  <p>Is parsable: <span>{canParse}</span></p>
+  <textarea
+    bind:value={stringifiedExamData}
+    on:input={updateExamData}
+    class="RawEditor"
+  />
+  <br />
+</div>
 
 <style>
+  .body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 300px;
+  }
+
   .RawEditor {
     width: 100%;
     height: 100%;
