@@ -48,7 +48,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 300px;
+    min-height: 300px;
   }
 
   .creatorBody {

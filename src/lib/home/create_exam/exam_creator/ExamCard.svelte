@@ -25,7 +25,7 @@
   let deleteQuestion = () => {
     question.text = "";
     question.answers = [];
-	question.isDeleted = true;
+    question.isDeleted = true;
     updateAnswers();
   };
 
@@ -35,19 +35,19 @@
 </script>
 
 <div class="container">
-  {#if shouldShowDelete}
-    <div class="row">
-      <div class="deleteButton" on:click={deleteQuestion}>Delete question</div>
-    </div>
-  {/if}
   <div class="row">
-    <div style="flex-basis: 100%;">
+    <div style="flex-basis: calc(100%);">
       <textarea
         placeholder="Question here..."
         bind:value={question.text}
         on:input={updateAnswers}
       />
     </div>
+    {#if shouldShowDelete}
+      <span class="deleteButton" style="width: 75px;" on:click={deleteQuestion}>
+        Delete
+      </span>
+    {/if}
   </div>
   {#each question.answers as answer}
     <div class="row">
@@ -89,6 +89,12 @@
     margin: 5px;
     cursor: pointer;
     user-select: none;
+    transition: 0.3s;
+    margin-left: 15px;
+  }
+
+  .deleteButton:hover {
+    background-color: #b20e0e;
   }
 
   .container {
@@ -114,7 +120,6 @@
     width: 100%;
     border: none;
     background-color: transparent;
-    padding-bottom: 5px;
     color: #d4d4d4;
     font-family: monospace;
     font-size: 16px;
