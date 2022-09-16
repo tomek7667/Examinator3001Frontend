@@ -7,7 +7,7 @@ let routeNames = [
 ];
 let routes = {};
 routeNames.forEach((name, index) => {
-  routes[name.replaceAll(" ", "_").toLowerCase()] = name;
+  routes[name.replaceAll(" ", "-").toLowerCase()] = name;
 });
 
 export { routeNames, routes };

@@ -10,10 +10,7 @@
   });
 
   let updateExamData = () => {
-    console.log(stringifiedExamData);
     const parsed = parseExamData(stringifiedExamData);
-    console.log(parsed);
-
     if (parsed) {
       examData = parsed;
       canParse = true;

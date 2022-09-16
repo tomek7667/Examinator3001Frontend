@@ -1,16 +1,22 @@
 <script>
   import { logout } from "../../common/api.js";
+  import { onMount } from "svelte";
   export let route;
   export let buttonName;
   export let isLogOut = false;
 
   let navigate = () => {
+    window.location.href = `/${buttonName.toLowerCase().replace(" ", "-")}`;
     route = buttonName;
   };
+
+  onMount(() => {
+    route = window.location.href.split("/")[3].replace("-", " ");
+  });
 </script>
 
 {#if !isLogOut}
-  {#if route === buttonName}
+  {#if route === buttonName.toLowerCase()}
     <div class="topBarElement underline">
       {buttonName}
     </div>

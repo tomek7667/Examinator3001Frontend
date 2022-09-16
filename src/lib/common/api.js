@@ -1,5 +1,5 @@
 let baseAddress =
-  "http://localhost:3003/api" || process.env.RACHUNKI_BACKEND_URL; // https://apiexaminator.cyber-man.pl/api
+  "http://localhost:3003/api/v1" || process.env.RACHUNKI_BACKEND_URL; // https://apiexaminator.cyber-man.pl/api
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -10,7 +10,7 @@ function getCookie(name) {
 
 const login = (username, password) => {
   return new Promise((resolve) => {
-    fetch(baseAddress + "/user/login", {
+    fetch(baseAddress + "/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +32,7 @@ const login = (username, password) => {
 
 const register = (username, password) => {
   return new Promise((resolve) => {
-    fetch(baseAddress + "/user/register", {
+    fetch(baseAddress + "/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const register = (username, password) => {
 };
 
 const verify = (token) => {
-  return fetch(baseAddress + "/user/verify", {
+  return fetch(baseAddress + "/users/verify", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -69,7 +69,7 @@ const verify = (token) => {
 };
 
 const changePassword = (oldPassword, newPassword, token) => {
-  return fetch(baseAddress + "/user/change-password", {
+  return fetch(baseAddress + "/users/change-password", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -90,13 +90,71 @@ const changePassword = (oldPassword, newPassword, token) => {
 };
 
 const changeUsername = (username, token) => {
-  return fetch(baseAddress + "/user/change-username", {
+  return fetch(baseAddress + "/users/change-username", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       username: username,
+      token: token,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
+const createExam = (exam, token) => {
+  return fetch(baseAddress + "/exams/post", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      exam: exam,
+      token: token,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
+const getUserExams = (token) => {
+  return fetch(`${baseAddress}/exams/get`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token: token,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
+const getExam = (examId, token) => {
+  return fetch(`${baseAddress}/exams/get/${examId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
       token: token,
     }),
   })
@@ -122,4 +180,7 @@ export {
   getCookie,
   changePassword,
   changeUsername,
+  createExam,
+  getUserExams,
+  getExam,
 };

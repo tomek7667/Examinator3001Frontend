@@ -7,6 +7,7 @@
     successToast,
     errorToast,
   } from "../../common/notifications/theme.js";
+  import { createExam, getCookie } from "../../common/api.js";
   import { onMount } from "svelte";
   export let wantExamCreator = true;
   export let canParse;
@@ -22,7 +23,7 @@
     message = wantExamCreator ? "exam creator" : "raw editor";
   });
 
-  let createExam = () => {
+  let createExamButton = () => {
     if (examData.questions.length === 0) {
       errorToast("Exam must have at least one question");
       return;
@@ -30,7 +31,13 @@
       errorToast("Exam must have a name");
       return;
     } else {
-      successToast("Exam created");
+      createExam(examData, getCookie("token")).then((res) => {
+        if (res.success) {
+          successToast(res.message);
+        } else {
+          errorToast(res.message);
+        }
+      });
     }
   };
 </script>
@@ -49,7 +56,7 @@
     <RawEditor bind:examData bind:canParse />
   {/if}
   <hr />
-  <button on:click={createExam}>Create exam</button>
+  <button on:click={createExamButton}>Create exam</button>
 </div>
 
 <style>
