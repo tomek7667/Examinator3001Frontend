@@ -1,6 +1,11 @@
 let baseAddress =
   "http://localhost:3003/api/v1" || process.env.RACHUNKI_BACKEND_URL; // https://apiexaminator.cyber-man.pl/api
 
+let verifyingHeaders = {
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${getCookie("token")}`,
+};
+
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -52,15 +57,10 @@ const register = (username, password) => {
   });
 };
 
-const verify = (token) => {
+const verify = () => {
   return fetch(baseAddress + "/users/verify", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      token: token,
-    }),
+    headers: verifyingHeaders,
   })
     .then((res) => res.json())
     .then((res) => {
@@ -68,16 +68,13 @@ const verify = (token) => {
     });
 };
 
-const changePassword = (oldPassword, newPassword, token) => {
+const changePassword = (oldPassword, newPassword) => {
   return fetch(baseAddress + "/users/change-password", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: verifyingHeaders,
     body: JSON.stringify({
       oldPassword: oldPassword,
       newPassword: newPassword,
-      token: token,
     }),
   })
     .then((res) => res.json())
@@ -89,15 +86,12 @@ const changePassword = (oldPassword, newPassword, token) => {
     });
 };
 
-const changeUsername = (username, token) => {
+const changeUsername = (username) => {
   return fetch(baseAddress + "/users/change-username", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: verifyingHeaders,
     body: JSON.stringify({
       username: username,
-      token: token,
     }),
   })
     .then((res) => res.json())
@@ -109,15 +103,12 @@ const changeUsername = (username, token) => {
     });
 };
 
-const createExam = (exam, token) => {
+const createExam = (exam) => {
   return fetch(baseAddress + "/exams/post", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: verifyingHeaders,
     body: JSON.stringify({
       exam: exam,
-      token: token,
     }),
   })
     .then((res) => res.json())
@@ -129,15 +120,10 @@ const createExam = (exam, token) => {
     });
 };
 
-const getUserExams = (token) => {
+const getUserExams = () => {
   return fetch(`${baseAddress}/exams/get`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      token: token,
-    }),
+    headers: verifyingHeaders,
   })
     .then((res) => res.json())
     .then((res) => {
@@ -148,15 +134,10 @@ const getUserExams = (token) => {
     });
 };
 
-const getExam = (examId, token) => {
-  return fetch(`${baseAddress}/exams/get/${examId}`, {
+const getExam = (examId) => {
+  return fetch(`${baseAddress}/exams/${examId}`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      token: token,
-    }),
+    headers: verifyingHeaders,
   })
     .then((res) => res.json())
     .then((res) => {

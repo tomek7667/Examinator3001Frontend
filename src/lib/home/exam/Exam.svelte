@@ -1,11 +1,11 @@
 <script>
-  import { getCookie, getExam } from "../../common/api";
+  import { getExam } from "../../common/api";
   import { onMount } from "svelte";
   export let id;
   let exam;
 
   onMount(() => {
-    getExam(id, getCookie("token")).then((result) => {
+    getExam(id).then((result) => {
       if (result.success) {
         exam = result.exam;
       } else {
@@ -13,6 +13,13 @@
       }
     });
   });
+
+  let checkText = (element) => {
+    try {
+      let checkBox = element.parentElement.children[0];
+      checkBox.checked = !checkBox.checked;
+    } catch (_) {}
+  };
 </script>
 
 <div class="container">
@@ -25,7 +32,9 @@
           {#each question.answers as answer}
             <div class="answer">
               <input type="checkbox" name={question.text} value={answer.text} />
-              {answer.text}
+              <span class="answer_text" on:click={(e) => checkText(e.target)}
+                >{answer.text}</span
+              >
             </div>
           {/each}
         </div>
@@ -54,14 +63,11 @@
   }
 
   .answer {
-    margin: 0.5rem 0;
+    margin: 0.5rem;
   }
 
-  .answer input {
-    margin-right: 0.5rem;
-  }
-
-  .answer input:checked {
-    background-color: #00ff00;
+  .answer_text {
+    margin-top: 0;
+    margin-left: 0.5rem;
   }
 </style>

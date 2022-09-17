@@ -5,7 +5,6 @@
   import PublicExamsPage from "./public_exams/PublicExamsPage.svelte";
   import YourExamsPage from "./your_exams/YourExamsPage.svelte";
   import AccountPage from "./AccountPage.svelte";
-  import { routeNames } from "../common/routes.js";
   import { Router, Route, Link } from "svelte-routing";
   import CreateExamPage from "./create_exam/CreateExamPage.svelte";
   import Footer from "../common/Footer.svelte";

@@ -1,5 +1,5 @@
 <script>
-  import { getCookie, changePassword } from "../../common/api";
+  import { changePassword } from "../../common/api";
   import {
     successToast,
     errorToast,
@@ -18,7 +18,7 @@
       errorToast("New password cannot be the same as old password");
       return;
     }
-    changePassword(oldPassword, newPassword, getCookie("token"))
+    changePassword(oldPassword, newPassword)
       .then((response) => {
         if (response.success) {
           // toast.success("Password changed successfully");

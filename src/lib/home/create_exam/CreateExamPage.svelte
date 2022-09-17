@@ -7,7 +7,7 @@
     successToast,
     errorToast,
   } from "../../common/notifications/theme.js";
-  import { createExam, getCookie } from "../../common/api.js";
+  import { createExam } from "../../common/api.js";
   import { onMount } from "svelte";
   export let wantExamCreator = true;
   export let canParse;
@@ -31,7 +31,7 @@
       errorToast("Exam must have a name");
       return;
     } else {
-      createExam(examData, getCookie("token")).then((res) => {
+      createExam(examData).then((res) => {
         if (res.success) {
           successToast(res.message);
         } else {

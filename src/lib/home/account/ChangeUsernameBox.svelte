@@ -1,5 +1,5 @@
 <script>
-  import { getCookie, changeUsername } from "../../common/api";
+  import { changeUsername } from "../../common/api";
   import {
     successToast,
     errorToast,
@@ -14,7 +14,7 @@
       return;
     }
 
-    changeUsername(newUsername, getCookie("token"))
+    changeUsername(newUsername)
       .then((response) => {
         if (response.success) {
           successToast("Username changed successfully");

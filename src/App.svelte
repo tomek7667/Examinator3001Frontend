@@ -8,7 +8,7 @@
   import { SvelteToast } from "@zerodevx/svelte-toast";
   import Home from "./lib/home/Home.svelte";
   import { onMount } from "svelte";
-  import { getCookie, verify } from "./lib/common/api";
+  import { verify, getCookie } from "./lib/common/api";
 
   let isLoading = true;
   let wantLogin = true;
@@ -18,15 +18,15 @@
   let password = "";
   let passwordConfirmation = "";
 
-  onMount(() => {
+  onMount(async () => {
     // Get token based on cookie then change isLogged variable
+    isLoading = true;
     let token = getCookie("token");
     if (token) {
-      verify(token)
+      verify()
         .then((response) => {
-          if (response.auth) {
+          if (response.success) {
             isLogged = true;
-            // Get information form jwt token
             username = response.username;
           }
         })

@@ -1,11 +1,11 @@
 <script>
   import { errorToast } from "../../common/notifications/theme";
   import { onMount } from "svelte";
-  import { getCookie, getUserExams } from "../../common/api";
+  import { getUserExams } from "../../common/api";
   let exams = [];
 
   onMount(() => {
-    getUserExams(getCookie("token")).then((res) => {
+    getUserExams().then((res) => {
       if (res.success) {
         exams = res.exams;
       } else {
@@ -28,3 +28,10 @@
     <button id={exam.id} on:click={() => viewExam(exam.id)}>{exam.name}</button>
   {/each}
 {/if}
+
+<style>
+  button {
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
+</style>
